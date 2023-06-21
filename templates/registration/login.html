@@ -1,0 +1,61 @@
+{% extends 'coding/base.html' %}
+{% block header_center %}
+<ul id="menu">
+  <li>
+    <a href="/login">Login</a>
+  </li>
+  <li>
+    <a href="/signup">Register</a>
+  </li>
+</ul>
+{% endblock header_center %}
+{% block content %}
+<div class="login-left">
+  <div class="l-icon l-space" id="li-about">
+    <h1>beecrowd</h1>
+    <p>
+      We are a global community of developers committed to keep evolving
+      as students and professionals. Train algorithms and programming
+      challenges and become the expert you always dreamed to be.
+    </p>
+  </div>
+</div>
+<div class="login-center">
+  {% block login_form %}
+  <div id="users-form">
+    <form method="post" accept-charset="utf-8">
+      {% csrf_token %}
+      <div class="input email">
+        <label for="{{ form.username.id_for_label }}">Email</label><input type="email" name="username" minlength="3"
+          maxlength="100" autofocus="autofocus" id="{{ form.username.id_for_label }}" />
+      </div>
+      <div class="input password">
+        <label for="{{ form.password.id_for_label }}">Password</label><input type="password" name="password"
+          id="{{ form.password.id_for_label }}" />
+      </div>
+      <div class="remember-me">
+        <input type="hidden" name="remember_me" value="0" /><label for="remember-me"><input type="checkbox"
+            name="remember_me" value="1" id="remember-me" />Remember me</label>
+      </div>
+      <div class="submit">
+        <input type="submit" class="send-purple send-right" value="Sign In" />
+      </div>
+    </form>
+    <div class="both"></div>
+  </div>
+  <div id="manage-account">
+    <a href="{% url 'password_reset' %}" class="send-link-large send-white send-left">Reset password</a>
+  </div>
+  {% endblock login_form %}
+</div>
+<div class="login-right">
+  <div class="l-icon l-space" id="li-rank">
+    <h1>Competition and Ranking</h1>
+    <p>
+      Join the brightest minds in competitive programming! Participate
+      in competitions, contests and tournaments! Compare your knowledge
+      with your peers. Level up, grow and shine in your career!
+    </p>
+  </div>
+</div>
+{% endblock content %}

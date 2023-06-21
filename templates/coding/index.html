@@ -1,0 +1,180 @@
+{% extends 'coding/base.html' %}
+{% block header_left %}
+<div class="h-avatar animated rubberBand" style="background-image: url('{{ avatar }}')">
+</div>
+<div class="h-user">
+  <strong>Hi,</strong> {{ user.username }}<br>
+  <i>{{ user.email }}</i>
+</div>
+{% endblock header_left %}
+
+{% block header_center %}
+<ul id="menu">
+  <li>
+    <a href="/profile/857226">Profile</a>
+  </li>
+  <li>
+    <a href="/news">Matchs</a><em>504</em>
+  </li>
+  <li>
+    <a href="/rank">Ranks</a>
+  </li>
+  <li class="h-option">
+    <a href="{% url 'logout' %}">Sign Out</a>
+  </li>
+</ul>
+{% endblock header_center %}
+
+{% block content %}
+<div id="side-bar">
+  <div id="top-rank">
+    <span>TOP 20</span>
+    <ul>
+      <li>
+        <a href="/profile/364608">Prof.MozarSilva</a>
+      </li>
+      <li>
+        <a href="/profile/426517">WesleyDias</a>
+      </li>
+      <li>
+        <a href="/profile/438026">kirito-kun</a>
+      </li>
+      <li>
+        <a href="/profile/99575">UITS_Bangladeshi_...</a>
+      </li>
+      <li>
+        <a href="/profile/175304">feodorv</a>
+      </li>
+      <li>
+        <a href="/profile/40980">MayconAlves</a>
+      </li>
+      <li>
+        <a href="/profile/13607">gduarte</a>
+      </li>
+      <li>
+        <a href="/profile/34355">eldsmonteiro</a>
+      </li>
+      <li>
+        <a href="/profile/194289">rdorneles</a>
+      </li>
+      <li>
+        <a href="/profile/85063">policarpo</a>
+      </li>
+      <li>
+        <a href="/profile/75571">youtube.comFelipe...</a>
+      </li>
+      <li>
+        <a href="/profile/20268">lfvtrivelatto</a>
+      </li>
+      <li>
+        <a href="/profile/120497">drangelp</a>
+      </li>
+      <li>
+        <a href="/profile/210312">ljoaquim0</a>
+      </li>
+      <li>
+        <a href="/profile/361606">EsraelSousa-IFCE_...</a>
+      </li>
+      <li>
+        <a href="/profile/642570">Nazmul_Hasan_Nihal</a>
+      </li>
+      <li>
+        <a href="/profile/21704">EduardoTheodoro</a>
+      </li>
+      <li>
+        <a href="/profile/338094">GersonVinicius</a>
+      </li>
+      <li>
+        <a href="/profile/29783">xTecna</a>
+      </li>
+      <li>
+        <a href="/profile/440610">ThePhenomenal</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="main-content">
+  <div id="page-name" class="pn-dashboard">
+    <h1>DASHBOARD</h1>
+    <p>This is your dashboard. Here you will find some interesting stuff.</p>
+  </div>
+  <div class="block-left">
+    <div class="st-half-box st-left tour-step-progress">
+      <h3>WIN</h3>
+      <p class="st-number" id="st-submissions">0</p>
+    </div>
+    <div class="st-half-box st-right">
+      <h3>DRAW</h3>
+      <p class="st-number" id="st-solved">0</p>
+    </div>
+  </div>
+  <div class="block-right">
+    <div class="st-half-box st-left">
+      <h3>LOSE</h3>
+      <p class="st-number">0</p>
+    </div>
+    <div class="st-half-box st-right">
+      <h3>POINTS</h3>
+      <p class="st-number">0</p>
+    </div>
+  </div>
+  <ul id="big-buttons">
+    <li class="left dash-problems" style="cursor: pointer;">
+      <div>
+        <a href="/categories">Problems</a>
+        <p>Browse our repository of problems, divided into 9 big categories.</p>
+        <b>BROWSE</b>
+      </div>
+    </li>
+    <li class="right dash-calendar" style="cursor: pointer;">
+      <div>
+        <a href="/problems/latest">Latest</a>
+        <p>The last problems included in our repository all in one place!</p>
+        <b>BROWSE</b>
+      </div>
+    </li>
+    <li class="left dash-rank" style="cursor: pointer;">
+      <div>
+        <a href="/rank">Rank</a>
+        <p>Visualize the main rank of the beecrowd website.</p>
+        <b>VIEW</b>
+      </div>
+    </li>
+    <li class="right dash-universities" style="cursor: pointer;">
+      <div>
+        <a href="/universities">Universities</a>
+        <p>Select your University and check out the rank.</p>
+        <b>BROWSE</b>
+      </div>
+    </li>
+    <li class="left dash-contests" style="cursor: pointer;">
+      <div>
+        <a href="/contests">Contests</a>
+        <p>Practice for programming competitions!</p>
+        <b>VIEW</b>
+      </div>
+    </li>
+    <li class="right dash-recommended" style="cursor: pointer;">
+      <div>
+        <a href="/recommendations">Recommendations</a>
+        <p>Selected problems for you to solved based on your skills.</p>
+        <b>VIEW</b>
+      </div>
+    </li>
+    <li class="left dash-help" style="cursor: pointer;">
+      <div>
+        <a href="/faqs/about/examples">Help</a>
+        <p>Check out some tips to use the beecrowd website.</p>
+        <b>HELP ME!</b>
+      </div>
+    </li>
+    <li class="right dash-feedback" style="cursor: pointer;">
+      <div>
+        <a href="/feedbacks/add">Feedback</a>
+        <p>Report bugs and tell us what you think about the website.</p>
+        <b>SEND</b>
+      </div>
+    </li>
+  </ul>
+</div>
+{% endblock content %}

@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-import os
 
 import environs
 
@@ -31,7 +30,7 @@ SECRET_KEY = env(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DJANGO_DEBUG", default=False)
+DEBUG = env.bool("DJANGO_DEBUG", default=True)
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 
@@ -45,7 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.messages",
     "django.contrib.sessions",
-    "django.contrib.sites",
+    # "django.contrib.sites",
     "django.contrib.staticfiles",
 ]
 
@@ -55,7 +54,7 @@ INSTALLED_APPS += []
 
 # Our apps
 
-INSTALLED_APPS += []
+INSTALLED_APPS += ["coding"]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -146,15 +145,17 @@ STATICFILES_DIRS = (str(BASE_DIR.joinpath("frontend")),)
 MEDIA_URL = "/media/"
 MEDIA_ROOT = str(BASE_DIR.joinpath("media"))
 
+DEFAULT_FROM_EMAIL = env("FROM_EMAIL", default="hopit.bkdn@gmail.com")
 if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 else:
-    email = env.dj_email_url("EMAIL_URL", default="smtp://maildev")
-    EMAIL_HOST = email["EMAIL_HOST"]
-    EMAIL_HOST_PASSWORD = email["EMAIL_HOST_PASSWORD"]
-    EMAIL_HOST_USER = email["EMAIL_HOST_USER"]
-    EMAIL_PORT = email["EMAIL_PORT"]
-    EMAIL_USE_TLS = email["EMAIL_USE_TLS"]
+    SENDGRID_API_KEY = env("SENDGRID_API_KEY")
+    EMAIL_HOST = env("EMAIL_HOST", default="smtp.sendgrid.net")
+    EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+    EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="apikey")
+    EMAIL_PORT = env("EMAIL_PORT", default=587)
+    EMAIL_USE_TLS = env("EMAIL_USE_TLS", default=True)
 
 # Parse cache URLS, e.g "redis://localhost:6379/0"
 CACHES = {"default": env.dj_cache_url("CACHE_URL", default="redis://localhost:6379/0")}
@@ -164,3 +165,8 @@ CACHES = {"default": env.dj_cache_url("CACHE_URL", default="redis://localhost:63
 ADMIN_URL = env("ADMIN_URL", default="admin/")
 
 SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = ["coding.auth.backend.EmailBackend"]
+LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = "/login"
+LOGOUT_REDIRECT_URL = "/login"

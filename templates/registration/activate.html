@@ -1,0 +1,22 @@
+{% extends 'registration/login.html' %}
+{% block login_form %}
+{% if validlink %}
+<div id="register">
+  <h1>
+    <a href="{% url 'login' %}">Account activation complete</a>
+  </h1>
+  <p>
+    Your account has been registered. You can log in now
+  </p>
+</div>
+{% else %}
+<div id="register">
+  <h1>
+    <a href="{% url 'login' %}">Invalid Link</a>
+  </h1>
+  <p>
+    The activation link was invalid, possibly because it has already been used. Please check your inbox.
+  </p>
+</div>
+{% endif %}
+{% endblock login_form %}
