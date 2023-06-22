@@ -40,6 +40,7 @@ filelock==3.11.0
 identify==2.5.22
     # via pre-commit
 iniconfig==2.0.0
+django-hashid-field==3.3.7
     # via pytest
 marshmallow==3.19.0
 mysqlclient==2.1.1
@@ -88,3 +89,5 @@ whitenoise==6.4.0
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
+redis==4.6.0
+hiredis==2.2.3

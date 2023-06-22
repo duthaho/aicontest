@@ -166,6 +166,10 @@ ADMIN_URL = env("ADMIN_URL", default="admin/")
 
 SITE_ID = 1
 
+HASHID_FIELD_SALT = env(
+    "HASHID_FIELD_SALT", default="fv%8ns4376&c4t06fw=9m6$+w4f&3at*-a&(*efc7ev(jqz3al"
+)
+
 AUTHENTICATION_BACKENDS = ["coding.auth.backend.EmailBackend"]
 LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "/login"

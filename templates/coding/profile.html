@@ -1,0 +1,236 @@
+{% extends 'coding/index.html' %} {% load static %} {% block sidebar %}
+<div id="logo">
+  <a href="#"><img src="https://picsum.photos/162" width="162" /></a>
+</div>
+<div class="information-box">
+  <h3>FRIENDS</h3>
+  <ul class="pb-friends">
+    <li class="badge-0" aria-describedby="tipsy" tabindex="0">
+      <span></span>
+    </li>
+    <li class="badge-0" aria-describedby="tipsy" tabindex="0">
+      <span></span>
+    </li>
+    <li class="badge-0" aria-describedby="tipsy" tabindex="0">
+      <span></span>
+    </li>
+    <li class="badge-0" aria-describedby="tipsy" tabindex="0">
+      <span></span>
+    </li>
+    <li class="badge-0" aria-describedby="tipsy" tabindex="0">
+      <span></span>
+    </li>
+    <li class="badge-0" aria-describedby="tipsy" tabindex="0">
+      <span></span>
+    </li>
+  </ul>
+  <a href="/friends/{{ profile.id }}" class="pb-all-badges">All Friends</a>
+</div>
+<div class="information-box">
+  <h3>ACHIEVEMENTS</h3>
+  <ul class="pb-badges">
+    <li class="badge-27" aria-describedby="tipsy" tabindex="0">
+      <span>Open Contest</span>
+    </li>
+    <li class="badge-50" aria-describedby="tipsy" tabindex="0">
+      <span>Github</span>
+    </li>
+    <li class="badge-4" aria-describedby="tipsy" tabindex="0">
+      <span>Custom Profile</span>
+    </li>
+    <li class="badge-0" aria-describedby="tipsy" tabindex="0">
+      <span></span>
+    </li>
+    <li class="badge-0" aria-describedby="tipsy" tabindex="0">
+      <span></span>
+    </li>
+    <li class="badge-0" aria-describedby="tipsy" tabindex="0">
+      <span></span>
+    </li>
+  </ul>
+</div>
+{% endblock sidebar %} {% block main %}
+<div id="page-name" class="pn-profile-male">
+  <h1>PROFILE</h1>
+  <p>Check out all the problems this user has already solved.</p>
+  {% if not me %}
+  <div class="profile-buttons">
+    <a href="" class="friend-request"> FIGHTING </a>
+  </div>
+  {% endif %}
+</div>
+<div>
+  <div class="form-left">
+    <div class="input text">
+      <label for="identification">Profile Id</label>
+      <input
+        type="text"
+        name="identification"
+        readonly="readonly"
+        disabled="disabled"
+        id="identification"
+        value="{{ profile.id }}"
+      />
+    </div>
+  </div>
+  <div class="form-right">
+    <label for="complete-profile">Win Rate</label>
+    <div class="complete-profile">
+      <div id="complete-bar" style="width: 82.79%">85%</div>
+    </div>
+  </div>
+  <div class="form-left">
+    <div class="input text">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        name="username"
+        readonly="readonly"
+        disabled="disabled"
+        id="username"
+        value="{{ profile.user.username }}"
+      />
+    </div>
+  </div>
+  <div class="form-right">
+    <div class="input text">
+      <label for="member-since">Member Since</label>
+      <input
+        type="text"
+        name="member_since"
+        readonly="readonly"
+        disabled="disabled"
+        id="member-since"
+        value="{{ profile.user.date_joined }}"
+      />
+    </div>
+  </div>
+  {% if me %}
+  <div class="search-box">
+    <h3>Bot</h3>
+    <form method="post" accept-charset="utf-8" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-left-medium" id="degree-form">
+        <div class="input text required">
+          <label for="{{ form.name.id_for_label }}">Bot Name</label>
+          <input
+            type="text"
+            name="name"
+            maxlength="100"
+            required
+            id="{{ form.name.id_for_label }}"
+          />
+        </div>
+      </div>
+      <div class="form-right-small" id="chckbx-preferred">
+        <div class="input checkbox">
+          <input
+            type="checkbox"
+            name="activate"
+            value="0"
+            id="{{ form.activate.id_for_label }}"
+          />
+        </div>
+        <label for="{{ form.activate.id_for_label }}">
+          Mark as activate
+          <div class="tooltip">
+            <img
+              src="{% static 'coding/img/i-question.svg' %}"
+              alt="?"
+              class="question"
+            />
+            <span class="tooltiptext">This bot will be used on next match</span>
+          </div>
+        </label>
+      </div>
+      <div class="both"></div>
+      <p id="box-information">
+        <input
+          type="file"
+          name="url"
+          required=""
+          id="{{ form.url.id_for_label }}"
+        />
+      </p>
+      <div class="submit">
+        <input type="submit" class="send-purple" value="Add" />
+      </div>
+    </form>
+  </div>
+  {% endif %}
+  <div class="both"></div>
+</div>
+<div id="table">
+  <div class="list">
+    <div id="element">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th class="left">Name</th>
+            <th>Activate</th>
+            <th>Win</th>
+            <th>Draw</th>
+            <th>Lose</th>
+            {% if me %}
+            <th>Options</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for bot in bot_list %}
+          <tr
+            class="{% if forloop.counter|divisibleby:2 %}impar{% else %}par{% endif %}"
+          >
+            <td class="id">{{ forloop.counter }}</td>
+            <td class="large">
+              {% if me %}
+              <a href="{% get_media_prefix %}{{ bot.url }}" target="_blank">
+                {{ bot.name }}
+              </a>
+              {% else %} {{ bot.name }} {% endif %}
+            </td>
+            <td class="small link activate-bot" data-bot-id="{{ bot.id }}">
+              <span
+                class="alive {% if bot.activate %}yes{% else %}no{% endif %}"
+              ></span>
+            </td>
+            <td class="tiny">{{ bot.win }}</td>
+            <td class="tiny">{{ bot.draw }}</td>
+            <td class="tiny">{{ bot.lose }}</td>
+            {% if me %}
+            <td class="id link delete-bot" data-bot-id="{{ bot.id }}">
+              <img src="{% static 'coding/img/i-delete.png' %}" alt="Remove" />
+            </td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div id="table-info">{{ page }} of {{ total }}</div>
+      <div id="table-paging">
+        <ul class="btn-paging">
+          <li class="first {% if page <= 1 %}disabled{% endif %}">
+            <a data-page="1" href="" onclick="return false;">First</a>
+          </li>
+          <li class="prev {% if page <= 1 %}disabled{% endif %}">
+            <a data-page="{{ page|add:-1 }}" href="" onclick="return false;"
+              >Previous</a
+            >
+          </li>
+          <li class="next {% if page >= total %}disabled{% endif %}">
+            <a data-page="{{ page|add:1 }}" href="" onclick="return false;"
+              >Next</a
+            >
+          </li>
+          <li class="last {% if page >= total %}disabled{% endif %}">
+            <a data-page="{{ total }}" href="" onclick="return false;">Last</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock main %} {% block scripts %}
+<script src="{% static 'coding/profile.js' %}"></script>
+{% endblock scripts %}

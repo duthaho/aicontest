@@ -1,12 +1,12 @@
-{% extends 'registration/login.html' %}
-{% block login_form %}
+{% extends 'registration/login.html' %} {% block login_form %}
 {% if email_sent %}
 <div id="register">
   <h1>
     <a href="{% url 'login' %}">Check your inbox</a>
   </h1>
   <p>
-    We've emailed you instructions for activate your account. You should receive the email shortly!
+    We've emailed you instructions for activate your account. You should receive
+    the email shortly!
   </p>
 </div>
 {% else %}
@@ -14,16 +14,40 @@
   <form method="post" accept-charset="utf-8">
     {% csrf_token %}
     <div class="input username">
-      <label for="{{ form.username.id_for_label }}">Username</label><input type="text" name="username" minlength="3"
-        maxlength="150" required autofocus="autofocus" id="{{ form.username.id_for_label }}" />
+      <label for="{{ form.username.id_for_label }}">Username</label>
+      <input
+        type="text"
+        name="username"
+        minlength="3"
+        maxlength="150"
+        required
+        autofocus="autofocus"
+        id="{{ form.username.id_for_label }}"
+      />
     </div>
     <div class="input email">
-      <label for="{{ form.email.id_for_label }}">Email</label><input type="email" name="email" minlength="3"
-        maxlength="200" required autofocus="autofocus" id="{{ form.email.id_for_label }}" />
+      <label for="{{ form.email.id_for_label }}">Email</label>
+      <input
+        type="email"
+        name="email"
+        minlength="3"
+        maxlength="200"
+        required
+        autofocus="autofocus"
+        id="{{ form.email.id_for_label }}"
+      />
     </div>
-    <div class="input password"><label for="{{ form.password1.id_for_label }}">Password</label><input type="password"
-        name="password1" id="{{ form.password1.id_for_label }}" minlength="8" maxlength="30" required=""
-        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&+-])[A-Za-z\d@$!%*#?&+-]{8,30}$">
+    <div class="input password">
+      <label for="{{ form.password1.id_for_label }}">Password</label>
+      <input
+        type="password"
+        name="password1"
+        id="{{ form.password1.id_for_label }}"
+        minlength="8"
+        maxlength="30"
+        required=""
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&+-])[A-Za-z\d@$!%*#?&+-]{8,30}$"
+      />
     </div>
     <div id="register-password-result">
       <p class="password-rule">Your password must contain:</p>
@@ -49,15 +73,25 @@
       </ul>
     </div>
     <div class="input password required">
-      <label for="{{ form.password2.id_for_label }}">
-        Confirm Password
-      </label>
-      <input type="password" name="password2" id="{{ form.password2.id_for_label }}" minlength="8" maxlength="30"
-        required="required">
+      <label for="{{ form.password2.id_for_label }}"> Confirm Password </label>
+      <input
+        type="password"
+        name="password2"
+        id="{{ form.password2.id_for_label }}"
+        minlength="8"
+        maxlength="30"
+        required="required"
+      />
     </div>
-    <div class="submit"><input type="submit" id="submit" class="send-purple signup" value="Sign Up"></div>
+    <div class="submit">
+      <input
+        type="submit"
+        id="submit"
+        class="send-purple signup"
+        value="Sign Up"
+      />
+    </div>
   </form>
   <div class="both"></div>
 </div>
-{% endif %}
-{% endblock login_form %}
+{% endif %} {% endblock login_form %}
