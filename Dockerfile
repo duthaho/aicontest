@@ -7,6 +7,8 @@ FROM python:3.10-slim-buster AS builder
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+RUN apt-get update -y && apt-get -y install default-libmysqlclient-dev python3-dev build-essential
+
 COPY requirements/requirements.txt /tmp/requirements.txt
 
 # add ",sharing=locked" if release should block until builder is complete

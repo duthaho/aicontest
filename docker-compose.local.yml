@@ -34,23 +34,6 @@ services:
     volumes:
       - redis-data:/data
 
-  web:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-      target: release
-    command: python manage.py runserver 0.0.0.0:8000
-    depends_on:
-      - db
-    environment:
-      - "MYSQL_HOST=db"
-    ports:
-      - "8000:8000"
-    volumes:
-      - .:/src
-      - django-media:/src/media
-      - django-static:/src/static
-
 volumes:
   django-media:
   django-static:
